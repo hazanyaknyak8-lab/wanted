@@ -17,8 +17,8 @@ const CFG={
     {id:"1435619294229561434",bounty:"₱120,000",threat:4,reason:""}
   ],
   servers:[
-    {label:"MAIN_SERVER",code:"jG7qCDJqFt"},
-    {label:"THE_PLUG",code:"XNVgUyqUAY",plug:true}
+    {label:"MAIN SERVER",code:"jG7qCDJqFt"},
+    {label:"PLUG",code:"XNVgUyqUAY",plug:true}
   ]
 };
 const CHARGES=["tumitira ng pwd"];
