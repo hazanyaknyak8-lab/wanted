@@ -13,16 +13,16 @@ const CFG={
     {id:"1147462845315952690",bounty:"₱350,000",threat:6,reason:""}
   ],
   wanted:[
-    {id:"909977852378763264",bounty:"₱150,000",threat:4,reason:"Nawala nang walang paalam."},
-    {id:"1435619294229561434",bounty:"₱120,000",threat:4,reason:"Huling nakita sa gitna ng gulo. Hindi pa nahuhuli."}
+    {id:"909977852378763264",bounty:"₱150,000",threat:4,reason:""},
+    {id:"1435619294229561434",bounty:"₱120,000",threat:4,reason:""}
   ],
   servers:[
     {label:"MAIN_SERVER",code:"jG7qCDJqFt"},
     {label:"THE_PLUG",code:"XNVgUyqUAY",plug:true}
   ]
 };
-const CHARGES=["Panggugulo sa server","Pag-iwas sa pag-aresto","Paglabag sa curfew ng VC","Pagiging masyadong astig","Pagnanakaw ng eksena"];
-/* =================================== */
+const CHARGES=["tumitira ng pwd"];
+
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const rm=matchMedia("(prefers-reduced-motion:reduce)").matches,coarse=matchMedia("(pointer:coarse)").matches;
@@ -52,7 +52,7 @@ document.addEventListener("keydown",e=>{
     const i=VIEWS.findIndex(v=>$("#"+v).classList.contains("on"));go(VIEWS[(i+(e.key==="ArrowRight"?1:VIEWS.length-1))%VIEWS.length])}
 });
 
-/* ---------- log ---------- */
+
 function log(msg,cls){
   const el=$("#log"),d=document.createElement("div");
   d.innerHTML=`<span>${new Date().toTimeString().slice(0,8)}</span>`;d.append(msg);if(cls)d.className=cls;
@@ -60,7 +60,7 @@ function log(msg,cls){
 }
 setInterval(()=>{$("#clk").textContent=new Date().toTimeString().slice(0,8)},1000);
 
-/* ---------- cards ---------- */
+
 function card(u){
   return `<button class="card offline" id="u${u.id}" data-id="${u.id}" aria-label="Open case file">
   <div class="ph"><img alt="" src="${AV}"><b class="rk">#${pad(u.rank)}</b><span class="stt"><i class="dot"></i><span class="stx sl">OFFLINE</span></span></div>
@@ -100,7 +100,7 @@ async function refresh(){
   if(openId)fillFile(byId(openId));
 }
 
-/* ---------- case file popup ---------- */
+
 let openId=null,lastFocus=null;
 function fillFile(u){
   const f=$(".file");f.className="file "+(u.s||"offline");
@@ -130,7 +130,7 @@ function closeFile(){
   if(lastFocus)lastFocus.focus();
 }
 
-/* ---------- servers ---------- */
+
 const srv=(s)=>`<a class="s${s.plug?" plug":""}" id="s${s.code}" href="https://discord.gg/${s.code}" target="_blank" rel="noopener">
   <img alt="" src="${AV}"><div><b>${s.label}</b><small>discord.gg/${s.code}</small></div><span class="go">${s.plug?"ENTER":"CONNECT"} &gt;</span></a>`;
 $("#gs").innerHTML=CFG.servers.map(srv).join("");
@@ -142,7 +142,7 @@ CFG.servers.forEach(async s=>{
   }catch(e){}
 });
 
-/* ---------- music: autoplay, fallback sa tap, resume ---------- */
+
 const au=new Audio();au.loop=true;au.preload="auto";au.src=CFG.music;au.volume=CFG.volume;
 const topEl=$("#top"),mute=$("#mute"),vol=$("#vol");
 let userOff=false,playing=false;vol.value=CFG.volume*100;
@@ -159,7 +159,6 @@ mute.onclick=()=>{if(au.paused){userOff=false;au.muted=false;au.play().then(ui).
 vol.oninput=()=>{au.volume=vol.value/100;if(au.volume>0){au.muted=false;userOff=false}ui()};
 ui();
 
-/* ---------- boot ---------- */
 const BOOT=[["BIOS","wanted-os kernel 6.6.1-red"],["NET","routing through 7 proxy nodes"],["SEC","bypassing firewall"],["SYS","mounting /roster/most_wanted"],
 ["API","connecting presence feed"],["AUD","initializing audio engine"],["SEC","decrypting target dossiers"],["SYS","all systems nominal"]];
 let ready=false,exited=false;
@@ -186,7 +185,6 @@ $("#gate").addEventListener("click",()=>{userOff=false;au.muted=false;au.play().
 log("root@wanted:~$ tail -f roster.log","al");log("[SYS] feed connected");stats();
 boot();
 
-/* ---------- red mouse trail ---------- */
 const tc=$("#trail"),tx=tc.getContext("2d");let pts=[],parts=[];
 function tsize(){const r=Math.min(devicePixelRatio||1,2);tc.width=innerWidth*r;tc.height=innerHeight*r;tx.setTransform(r,0,0,r,0,0)}
 tsize();addEventListener("resize",tsize);
