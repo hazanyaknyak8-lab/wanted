@@ -14,7 +14,7 @@ const CFG={
   ],
   wanted:[
     {id:"909977852378763264",bounty:"₱150,000",threat:4,reason:""},
-    {id:"1435619294229561434",bounty:"₱120,000",threat:4,reason:""}
+    {id:"1435619294229561434",bounty:"₱120,000",threat:4,reason:"pinakamabaho"}
   ],
   servers:[
     {label:"MAIN SERVER",code:"jG7qCDJqFt"},
