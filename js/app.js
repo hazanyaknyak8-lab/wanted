@@ -8,7 +8,7 @@ const CFG={
     {id:"1499499066932068454",bounty:"₱750,000",threat:9,reason:""},
     {id:"1556911422091427910",bounty:"₱600,000",threat:8,reason:""},
     {id:"1544422656852627496",bounty:"₱500,000",threat:8,reason:""},
-    {id:"1546289969960587270",bounty:"₱450,000",threat:7,reason:""},
+    {id:"1546289969960587270",bounty:"₱450,000",threat:7,reason:"nanununtok ng tanga, tinatapon ang mga basura kagaya mo"},
     {id:"1441623190412726355",bounty:"₱400,000",threat:7,reason:"."},
     {id:"1147462845315952690",bounty:"₱350,000",threat:6,reason:""}
   ],
