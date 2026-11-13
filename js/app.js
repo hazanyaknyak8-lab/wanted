@@ -21,7 +21,7 @@ const CFG={
     {label:"PLUG",code:"XNVgUyqUAY",plug:true}
   ]
 };
-const CHARGES=["tumitira ng pwd"];
+const CHARGES=["nagpapasabog"];
 
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
