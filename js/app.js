@@ -4,13 +4,13 @@ const CFG={
   volume:0.5,
   
   mostWanted:[
-    {id:"1530686788824469646",bounty:"₱1,000,000",threat:10,reason:"Hindi mahuli-huli. Laging nasa unahan ng lahat ng kalokohan."},
-    {id:"1499499066932068454",bounty:"₱750,000",threat:9,reason:"Pinaka-maingay sa VC at walang pakialam sa oras."},
-    {id:"1556911422091427910",bounty:"₱600,000",threat:8,reason:"May sariling mundo. Walang makakahawak."},
-    {id:"1544422656852627496",bounty:"₱500,000",threat:8,reason:"Ninakaw ang atensyon ng buong server."},
-    {id:"1546289969960587270",bounty:"₱450,000",threat:7,reason:"Masyadong malakas ang aura. Delikado sa publiko."},
-    {id:"1441623190412726355",bounty:"₱400,000",threat:7,reason:"Sumali sa gulo kahit walang nag-imbita."},
-    {id:"1147462845315952690",bounty:"₱350,000",threat:6,reason:"Tahimik pero alam ang lahat ng tsismis."}
+    {id:"1530686788824469646",bounty:"₱1,000,000",threat:10,reason:""},
+    {id:"1499499066932068454",bounty:"₱750,000",threat:9,reason:""},
+    {id:"1556911422091427910",bounty:"₱600,000",threat:8,reason:""},
+    {id:"1544422656852627496",bounty:"₱500,000",threat:8,reason:""},
+    {id:"1546289969960587270",bounty:"₱450,000",threat:7,reason:""},
+    {id:"1441623190412726355",bounty:"₱400,000",threat:7,reason:""},
+    {id:"1147462845315952690",bounty:"₱350,000",threat:6,reason:""}
   ],
   wanted:[
     {id:"909977852378763264",bounty:"₱150,000",threat:4,reason:"Nawala nang walang paalam."},
