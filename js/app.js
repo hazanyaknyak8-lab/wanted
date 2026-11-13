@@ -1,4 +1,3 @@
-
 const CFG={
   music:"music.mp3",          
   musicTitle:"NOW PLAYING",
@@ -34,7 +33,7 @@ const people=[...CFG.mostWanted.map((u,i)=>({...u,kind:"mw",rank:i+1})),...CFG.w
 const byId=id=>people.find(u=>u.id===id);
 $("#npt").textContent=CFG.musicTitle;
 
-
+/* ---------- views (walang page scroll) ---------- */
 const VIEWS=["home","mw","w","srv"];
 function go(v){
   if(!VIEWS.includes(v))v="home";
@@ -53,7 +52,7 @@ document.addEventListener("keydown",e=>{
     const i=VIEWS.findIndex(v=>$("#"+v).classList.contains("on"));go(VIEWS[(i+(e.key==="ArrowRight"?1:VIEWS.length-1))%VIEWS.length])}
 });
 
-
+/* ---------- log ---------- */
 function log(msg,cls){
   const el=$("#log"),d=document.createElement("div");
   d.innerHTML=`<span>${new Date().toTimeString().slice(0,8)}</span>`;d.append(msg);if(cls)d.className=cls;
@@ -61,7 +60,7 @@ function log(msg,cls){
 }
 setInterval(()=>{$("#clk").textContent=new Date().toTimeString().slice(0,8)},1000);
 
-
+/* ---------- cards ---------- */
 function card(u){
   return `<button class="card offline" id="u${u.id}" data-id="${u.id}" aria-label="Open case file">
   <div class="ph"><img alt="" src="${AV}"><b class="rk">#${pad(u.rank)}</b><span class="stt"><i class="dot"></i><span class="stx sl">OFFLINE</span></span></div>
@@ -101,7 +100,7 @@ async function refresh(){
   if(openId)fillFile(byId(openId));
 }
 
-
+/* ---------- case file popup ---------- */
 let openId=null,lastFocus=null;
 function fillFile(u){
   const f=$(".file");f.className="file "+(u.s||"offline");
@@ -116,7 +115,7 @@ function fillFile(u){
   $("#ma").textContent=u.act||"-";
   $("#mh").innerHTML='<i class="f"></i>'.repeat(n)+"<i></i>".repeat(10-n);
   $("#mwhy").textContent=u.reason||"No details. Classified.";
-  const ch=u.charges||[CHARGES[u.rank%5],CHARGES[(u.rank+2)%5]];
+  const ch=u.charges||[...new Set([CHARGES[u.rank%CHARGES.length],CHARGES[(u.rank+2)%CHARGES.length]])];
   $("#mc").innerHTML="";ch.forEach(c=>{const li=document.createElement("li");li.textContent=c;$("#mc").appendChild(li)});
   $("#mo").href="https://discord.com/users/"+u.id;
 }
@@ -131,7 +130,7 @@ function closeFile(){
   if(lastFocus)lastFocus.focus();
 }
 
-
+/* ---------- servers ---------- */
 const srv=(s)=>`<a class="s${s.plug?" plug":""}" id="s${s.code}" href="https://discord.gg/${s.code}" target="_blank" rel="noopener">
   <img alt="" src="${AV}"><div><b>${s.label}</b><small>discord.gg/${s.code}</small></div><span class="go">${s.plug?"ENTER":"CONNECT"} &gt;</span></a>`;
 $("#gs").innerHTML=CFG.servers.map(srv).join("");
@@ -143,7 +142,7 @@ CFG.servers.forEach(async s=>{
   }catch(e){}
 });
 
-
+/* ---------- music: autoplay, fallback sa tap, resume ---------- */
 const au=new Audio();au.loop=true;au.preload="auto";au.src=CFG.music;au.volume=CFG.volume;
 const topEl=$("#top"),mute=$("#mute"),vol=$("#vol");
 let userOff=false,playing=false;vol.value=CFG.volume*100;
@@ -252,3 +251,6 @@ function drawHero(now){
 }
 addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>{if(exited)initHero()},250)});
 (function hl(now){if($("#home").classList.contains("on"))drawHero(now);requestAnimationFrame(hl)})(performance.now());
+
+/* ---------- bg.gif: ilalagay lang kapag nahanap ---------- */
+const bgi=new Image();bgi.onload=()=>document.documentElement.classList.add("hasbg");bgi.src="bg.gif";
