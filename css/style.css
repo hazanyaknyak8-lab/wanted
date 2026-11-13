@@ -170,3 +170,6 @@ main{position:relative;min-height:0}
 .why{position:relative;overflow:hidden}
 .why::after{content:"WANTED";position:absolute;right:-4px;bottom:4px;font:900 30px var(--disp);letter-spacing:.1em;color:#ff1f2d1f;transform:rotate(-12deg);pointer-events:none}
 @media (max-width:640px){.grid{--n:3;--cw:min(29vw,21dvh)}.stt .sl{display:none}.stt{padding:4px 6px}.hb{padding:18px 12px}}
+
+/* bg.gif (kapag nandoon sa tabi ng index.html) */
+html.hasbg body{background:linear-gradient(#050102d0,#050102d0),url(../bg.gif) center/cover no-repeat fixed}
