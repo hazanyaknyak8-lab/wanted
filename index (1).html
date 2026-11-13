@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WANTED</title>
+<meta name="description" content="hindi kana dapat kilalanin pa, tatlong krus para sayo">
+<meta name="theme-color" content="#ff1f2d">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WANTED">
+<meta property="og:title" content="WANTED">
+<meta property="og:description" content="hindi kana dapat kilalanin pa, tatlong krus para sayo">
+<meta property="og:image" content="https://want3d.vercel.app/thumb.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Orbitron:wght@700;900&family=UnifrakturCook:wght@700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="trail"></canvas>
+
+<div id="gate"><div class="gw">
+  <div class="gt">WANTED//OS<small>SECURE ROSTER TERMINAL v3.0</small></div>
+  <div id="boot"></div>
+  <div class="pb"><i id="pbi"></i></div>
+  <div class="pc"><span id="pbt">BOOTING</span><span id="pbp">0%</span></div>
+  <div id="enter">[ TAP TO ENTER ]</div>
+</div></div>
+
+<header id="top" class="off">
+  <div class="brand">WANTED</div>
+  <nav id="nav">
+    <button data-v="home" class="on">HOME</button><button data-v="mw">MOST WANTED</button><button data-v="w">WANTED</button><button data-v="srv">SERVERS</button>
+  </nav>
+  <div class="pl"><div class="bars"><i></i><i></i><i></i><i></i></div><span id="npt">NOW PLAYING</span><input id="vol" type="range" min="0" max="100" value="50" aria-label="Volume"><button id="mute" aria-label="Mute or unmute music">♪</button></div>
+</header>
+
+<main>
+  <section class="view on" id="home">
+    <div class="hero">
+      <div class="stat">● STATUS :: AT LARGE &nbsp;<span id="clk">00:00:00</span></div>
+      <h1 class="glitch" data-t="WANTED">WANTED</h1>
+      <p class="tagl">hindi kana dapat kilalanin pa, tatlong krus para sayo</p>
+      <div class="hud"><span>TARGETS <b id="hT">0</b></span><span>ONLINE <b id="hO">0</b></span><span>SERVERS <b id="hS">0</b></span></div>
+      <div class="cta"><button class="btn" data-go="mw">VIEW MOST WANTED &gt;</button><button class="btn ghost" data-go="srv">HIDEOUTS</button></div>
+    </div>
+    <div id="logp"><div class="lh">SYSTEM_LOG.CLI <em>● LIVE</em></div><div id="log"></div></div>
+    <div class="fq"><span class="cr">✝ ✝ ✝</span>hindi kana dapat sambahin pa, tanginaka</div>
+  </section>
+
+  <section class="view" id="mw">
+    <div class="head"><h2>MOST WANTED</h2><em>TAP A TARGET FOR THE CASE FILE</em></div>
+    <div class="grid" id="gmw"></div>
+  </section>
+
+  <section class="view" id="w">
+    <div class="head"><h2>WANTED</h2><em>STILL ON THE RUN</em></div>
+    <div class="grid two" id="gw"></div>
+  </section>
+
+  <section class="view" id="srv">
+    <div class="head"><h2>HIDEOUTS</h2><em>ESTABLISH CONNECTION</em></div>
+    <div class="srvs" id="gs"></div>
+  </section>
+</main>
+
+<div id="modal" aria-hidden="true">
+  <div class="file" role="dialog" aria-modal="true" aria-label="Case file">
+    <button class="x" id="mx" aria-label="Close">✕</button>
+    <div class="ph"><img id="mi" alt=""><b class="rk" id="mr"></b></div>
+    <div class="fb">
+      <div class="mt" id="mk"></div>
+      <div class="mn" id="mn"></div>
+      <div class="sub" id="mu"></div>
+      <div class="row"><span>STATUS</span><b><i class="dot"></i><span id="ms"></span></b></div>
+      <div class="row"><span>BOUNTY</span><b class="bty" id="mb"></b></div>
+      <div class="row"><span>DOING</span><b id="ma"></b></div>
+      <div class="row"><span>THREAT</span><b class="thr" id="mh"></b></div>
+      <div class="why"><span>WANTED FOR</span><p id="mwhy"></p><ul id="mc"></ul></div>
+      <a class="btn" id="mo" target="_blank" rel="noopener">OPEN DISCORD PROFILE &gt;</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
