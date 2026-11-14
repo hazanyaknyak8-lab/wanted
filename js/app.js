@@ -19,7 +19,7 @@ const CFG={
     {id:"1435619294229561434",bounty:"₱120,000",threat:4,reason:"pinakamabaho"}
   ],
   watch:[
-    /* UNDER SURVEILLANCE: {id:"discord_id",bounty:"₱50,000",threat:2,reason:"",stamp:""} */
+    {id:"1331628794305314837",bounty:"₱50,000",threat:2,reason:"",stamp:""}
   ],
   servers:[
     {label:"MAIN SERVER",code:"jG7qCDJqFt"},
