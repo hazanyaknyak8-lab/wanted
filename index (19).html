@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WANTED</title>
+<meta name="description" content="hindi kana dapat kilalanin pa, tatlong krus para sayo">
+<meta name="theme-color" content="#ff1f2d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050102'/%3E%3Cpath d='M28 8h8v16h16v8H36v24h-8V32H12v-8h16z' fill='%23ff1f2d'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WANTED">
+<meta property="og:title" content="WANTED">
+<meta property="og:description" content="hindi kana dapat kilalanin pa, tatlong krus para sayo">
+<meta property="og:image" content="https://want3d.vercel.app/thumb.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Orbitron:wght@700;900&family=JetBrains+Mono:wght@700&family=Barlow+Condensed:wght@500;600;700&family=UnifrakturCook:wght@700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="fx"></canvas>
+<canvas id="trail"></canvas>
+
+<div id="gate"><div class="gw">
+  <div class="gt"><span class="cr3">✝ ✝ ✝</span>WANTED<small>DEAD OR ALIVE</small></div>
+  <div id="boot"></div>
+  <div class="pb"><i id="pbi"></i></div>
+  <div class="pc"><span id="pbt">BOOTING</span><span id="pbp">0%</span></div>
+  <div id="enter">TAP TO ENTER</div>
+</div></div>
+
+<header id="top" class="off">
+  <div class="brand">WANTED</div>
+  <nav id="nav">
+    <button data-v="home" class="on"><b>HOME</b></button><button data-v="hvt"><b>HIGH VALUE TARGET</b></button><button data-v="mw"><b>MOST WANTED</b></button><button data-v="w"><b>WANTED</b></button><button data-v="sv"><b>UNDER SURVEILLANCE</b></button><button data-v="srv"><b>HIDEOUTS</b></button>
+  </nav>
+  <div class="pl"><div class="bars"><i></i><i></i><i></i><i></i></div><span id="npt">NOW PLAYING</span><input id="vol" type="range" min="0" max="100" value="50" aria-label="Volume"><button id="mute" aria-label="Mute or unmute music">♪</button></div>
+</header>
+<div id="tick" aria-hidden="true"><div class="tk" id="tk"></div></div>
+
+<main>
+  <section class="view on" id="home">
+    <div class="hero">
+      <div class="stat">● AT LARGE &nbsp;<span id="clk">00:00:00</span></div>
+      <div class="hb"><b class="c c1"></b><b class="c c2"></b><b class="c c3"></b><b class="c c4"></b><canvas id="hero" role="img" aria-label="WANTED"></canvas></div>
+      <p class="tagl">hindi kana dapat kilalanin pa, tatlong krus para sayo</p>
+      <div class="hud"><span>TARGETS <b id="hT">0</b></span><span>ONLINE <b id="hO">0</b></span><span>SERVERS <b id="hS">0</b></span><span>BOUNTY <b id="hB">₱0</b></span></div>
+      <div class="cta"><button class="btn" data-go="mw">VIEW MOST WANTED &gt;</button><button class="btn ghost" data-go="srv">HIDEOUTS</button></div>
+    </div>
+    <div id="logp"><div class="lh">LIVE FEED <em>● LIVE</em></div><div id="log"></div></div>
+    <div class="fq"><span class="cr">✝ ✝ ✝</span>hindi kana dapat sambahin pa, tanginaka</div>
+  </section>
+
+  <section class="view" id="hvt">
+    <div class="head"><h2>HIGH VALUE TARGET</h2><em>PRIORITY ONE</em></div>
+    <div class="grid one" id="ghvt"></div>
+  </section>
+
+  <section class="view" id="mw">
+    <div class="head"><h2>MOST WANTED</h2><em>TAP A TARGET FOR THE CASE FILE</em></div>
+    <div class="flt"><label class="srch"><span>⌕</span><input class="q" type="search" placeholder="SEARCH TARGET" autocomplete="off" spellcheck="false" aria-label="Search target"></label><button class="chip" data-f="on" aria-pressed="false">● ONLINE ONLY</button></div>
+    <div class="grid" id="gmw"></div>
+  </section>
+
+  <section class="view" id="w">
+    <div class="head"><h2>WANTED</h2><em>STILL ON THE RUN</em></div>
+    <div class="flt"><label class="srch"><span>⌕</span><input class="q" type="search" placeholder="SEARCH TARGET" autocomplete="off" spellcheck="false" aria-label="Search target"></label><button class="chip" data-f="on" aria-pressed="false">● ONLINE ONLY</button></div>
+    <div class="grid two" id="gw"></div>
+  </section>
+
+  <section class="view" id="sv">
+    <div class="head"><h2>UNDER SURVEILLANCE</h2><em>UNDER WATCH</em></div>
+    <div class="flt"><label class="srch"><span>⌕</span><input class="q" type="search" placeholder="SEARCH TARGET" autocomplete="off" spellcheck="false" aria-label="Search target"></label><button class="chip" data-f="on" aria-pressed="false">● ONLINE ONLY</button></div>
+    <div class="grid sv" id="gsv"></div>
+  </section>
+
+  <section class="view" id="srv">
+    <div class="head"><h2>HIDEOUTS</h2><em>ESTABLISH CONNECTION</em></div>
+    <div class="srvs" id="gs"></div>
+  </section>
+</main>
+
+<div id="modal" aria-hidden="true">
+  <div class="file" role="dialog" aria-modal="true" aria-label="Case file">
+    <button class="x" id="mx" aria-label="Close">✕</button>
+    <div class="ph"><img id="mi" alt=""><b class="rk" id="mr"></b></div>
+    <div class="fb">
+      <div class="mt" id="mk"></div>
+      <div class="mn" id="mn"></div>
+      <div class="sub" id="mu"></div>
+      <div class="row"><span>STATUS</span><b><i class="dot"></i><span id="ms"></span></b></div>
+      <div class="row"><span>BOUNTY</span><b class="bty" id="mb"></b></div>
+      <div class="row"><span>DOING</span><b id="ma"></b></div>
+      <div class="row"><span>THREAT</span><b class="thr" id="mh"></b></div>
+      <div class="why"><span>WANTED FOR</span><p id="mwhy"></p><ul id="mc"></ul></div>
+      <div class="acts"><button class="nb" data-nav="-1" aria-label="Previous target">‹</button><button class="nb cp" id="mcp">COPY ID</button><a class="btn" id="mo" target="_blank" rel="noopener">OPEN DISCORD &gt;</a><button class="nb" data-nav="1" aria-label="Next target">›</button></div>
+    </div>
+  </div>
+</div>
+
+<div id="toasts" aria-live="polite"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
