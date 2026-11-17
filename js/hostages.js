@@ -5,6 +5,4 @@
    {name:"PANGALAN", video:"hos/clip1.mp4", image:"hos/pic1.jpg", note:"caption", date:"17 NOV 2026"},
 */
 window.HOS=[
-   {name:"LUCI BADAP", note:"HINDI MARUNONG MAGMAHAL", date:"NOV 78 3084"},
-   {name:"MY BABU RIAN", note:"I MISS YOU", date:"DEC 01 2000"},
 ];
