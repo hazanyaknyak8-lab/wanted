@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div id="bgx"><b class="g"></b><b class="t"></b><b class="s s1"></b><b class="s s2"></b><b class="v"></b></div>
 <canvas id="fx"></canvas>
 <canvas id="trail"></canvas>
 
@@ -32,7 +33,7 @@
 <header id="top" class="off">
   <div class="brand">WANTED</div>
   <nav id="nav">
-    <button data-v="home" class="on"><b>HOME</b></button><button data-v="hvt"><b>HIGH VALUE TARGET</b></button><button data-v="mw"><b>MOST WANTED</b></button><button data-v="w"><b>WANTED</b></button><button data-v="sv"><b>UNDER SURVEILLANCE</b></button><button data-v="srv"><b>HIDEOUTS</b></button>
+    <i id="nvi"></i><button data-v="home" class="on"><b>HOME</b></button><button data-v="mw"><b>MOST WANTED</b></button><button data-v="w"><b>WANTED</b></button><button data-v="hos"><b>HOS</b></button><button data-v="srv"><b>HIDEOUTS</b></button>
   </nav>
   <div class="pl"><div class="bars"><i></i><i></i><i></i><i></i></div><span id="npt">NOW PLAYING</span><input id="vol" type="range" min="0" max="100" value="50" aria-label="Volume"><button id="mute" aria-label="Mute or unmute music">♪</button></div>
 </header>
@@ -51,11 +52,6 @@
     <div class="fq"><span class="cr">✝ ✝ ✝</span>hindi kana dapat sambahin pa, tanginaka</div>
   </section>
 
-  <section class="view" id="hvt">
-    <div class="head"><h2>HIGH VALUE TARGET</h2><em>PRIORITY ONE</em></div>
-    <div class="grid one" id="ghvt"></div>
-  </section>
-
   <section class="view" id="mw">
     <div class="head"><h2>MOST WANTED</h2><em>TAP A TARGET FOR THE CASE FILE</em></div>
     <div class="flt"><label class="srch"><span>⌕</span><input class="q" type="search" placeholder="SEARCH TARGET" autocomplete="off" spellcheck="false" aria-label="Search target"></label><button class="chip" data-f="on" aria-pressed="false">● ONLINE ONLY</button></div>
@@ -68,10 +64,9 @@
     <div class="grid two" id="gw"></div>
   </section>
 
-  <section class="view" id="sv">
-    <div class="head"><h2>UNDER SURVEILLANCE</h2><em>UNDER WATCH</em></div>
-    <div class="flt"><label class="srch"><span>⌕</span><input class="q" type="search" placeholder="SEARCH TARGET" autocomplete="off" spellcheck="false" aria-label="Search target"></label><button class="chip" data-f="on" aria-pressed="false">● ONLINE ONLY</button></div>
-    <div class="grid sv" id="gsv"></div>
+  <section class="view" id="hos">
+    <div class="head"><h2>HOSTAGE</h2><em>SEALED · TAP TO OPEN</em></div>
+    <div class="grid hg" id="ghos"></div>
   </section>
 
   <section class="view" id="srv">
@@ -98,8 +93,11 @@
   </div>
 </div>
 
+<div id="hm" aria-hidden="true"><div class="hb2" id="hbox"></div></div>
+
 <div id="toasts" aria-live="polite"></div>
 
+<script src="js/hostages.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
