@@ -199,16 +199,7 @@ ui();
 /* ---------- boot ---------- */
 const BOOT=[["","Opening the list"],["","Finding the targets"],["","Loading the bounties"],["","Ready"]];
 let ready=false,exited=false;
-const STG=["BINUBUKSAN ANG LISTAHAN","HINAHANAP ANG MGA TARGET","BINABASA ANG BOUNTY","HANDA NA"];
-async function boot(){
-  const D=rm?0:2900,t0=performance.now();
-  await new Promise(res=>{(function f(n){
-    const k=D?Math.min(1,(n-t0)/D):1,e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2,p=Math.round(e*100);
-    $("#pbi").style.width=p+"%";$("#pbp").textContent=p+"%";$("#pbt").textContent=STG[Math.min(3,Math.floor(e*4))];
-    if(k<1)requestAnimationFrame(f);else res()})(t0)});
-  await sleep(rm?0:450);
-  ready=true;if(playing)exit();else $("#enter").classList.add("show");
-}
+async function boot(){await sleep(rm?0:700);ready=true;$("#enter").classList.add("show")}
 function exit(){
   if(exited)return;exited=true;
   $("#gate").classList.add("out");document.body.classList.add("live");
@@ -232,9 +223,9 @@ if(!rm){
   document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse")burst(e.clientX,e.clientY)},{passive:true});
   (function loop(now){
     tx.clearRect(0,0,innerWidth,innerHeight);
-    pts=pts.filter(p=>now-p.t<600);tx.lineCap="round";tx.shadowColor="#ff1f2d";tx.shadowBlur=14;
+    pts=pts.filter(p=>now-p.t<600);tx.lineCap="round";tx.shadowColor="#ff1f2d";tx.shadowBlur=0;
     for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],k=1-(now-b.t)/600;if(Math.hypot(b.x-a.x,b.y-a.y)>160)continue;
-      tx.strokeStyle=`rgba(255,31,45,${k})`;tx.lineWidth=1+k*5;tx.beginPath();tx.moveTo(a.x,a.y);tx.lineTo(b.x,b.y);tx.stroke()}
+      tx.strokeStyle=`rgba(255,31,45,${k})`;tx.lineWidth=3+k*9;tx.globalAlpha=.25;tx.beginPath();tx.moveTo(a.x,a.y);tx.lineTo(b.x,b.y);tx.stroke();tx.globalAlpha=1;tx.lineWidth=1+k*4;tx.stroke()}
     parts=parts.filter(p=>now-p.t<700);
     for(const p of parts){const k=1-(now-p.t)/700;p.x+=p.vx;p.y+=p.vy;p.vx*=.96;p.vy*=.96;tx.fillStyle=`rgba(255,60,70,${k})`;tx.fillRect(p.x,p.y,p.s*k+1,p.s*k+1)}
     requestAnimationFrame(loop);
