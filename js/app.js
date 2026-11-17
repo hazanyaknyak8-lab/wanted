@@ -5,7 +5,7 @@ const CFG={
   owner:"1530686788824469646",
 
   mostWanted:[
-    {id:"1530686788824469646",bounty:"₱2,000,000",threat:10,reason:"hari ng lahat"},
+    {id:"1530686788824469646",bounty:"₱69,000,000",threat:10,reason:"hari ng lahat"},
     {id:"1499499066932068454",bounty:"₱750,000",threat:9,reason:""},
     {id:"1556911422091427910",bounty:"₱600,000",threat:8,reason:""},
     {id:"1544422656852627496",bounty:"₱500,000",threat:8,reason:""},
@@ -16,6 +16,7 @@ const CFG={
   wanted:[
     {id:"909977852378763264",bounty:"₱150,000",threat:4,reason:""},
     {id:"1435619294229561434",bounty:"₱120,000",threat:4,reason:"pinakamabaho"}
+    {id:"1274984004780556371",bounty:"₱100,000",threat:4,reason:""},
   ],
   servers:[
     {label:"MAIN SERVER",code:"jG7qCDJqFt"},
