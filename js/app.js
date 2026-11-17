@@ -2,10 +2,8 @@ const CFG={
   music:"music.mp3",          
   musicTitle:"NOW PLAYING",
   volume:0.5,
+  owner:"1530686788824469646",
 
-  hvt:[
-    {id:"1530686788824469646",bounty:"₱1,000,000",threat:10,reason:"hari ng lahat"}
-  ],
   mostWanted:[
     {id:"1499499066932068454",bounty:"₱750,000",threat:9,reason:""},
     {id:"1556911422091427910",bounty:"₱600,000",threat:8,reason:""},
@@ -18,12 +16,10 @@ const CFG={
     {id:"909977852378763264",bounty:"₱150,000",threat:4,reason:""},
     {id:"1435619294229561434",bounty:"₱120,000",threat:4,reason:"pinakamabaho"}
   ],
-  watch:[
-    {id:"1331628794305314837",bounty:"₱50,000",threat:2,reason:"",stamp:""}
-  ],
   servers:[
     {label:"MAIN SERVER",code:"jG7qCDJqFt"},
-    {label:"PLUG",code:"XNVgUyqUAY",plug:true}
+    {label:"PLUG",code:"XNVgUyqUAY",plug:true},
+    {label:"PLUG",code:"wrightontop",plug:true}
   ]
 };
 const CHARGES=["nagpapasabog"];
@@ -34,27 +30,27 @@ const rm=matchMedia("(prefers-reduced-motion:reduce)").matches,coarse=matchMedia
 const sleep=ms=>new Promise(r=>setTimeout(r,ms)),pad=n=>String(n).padStart(2,"0");
 const AV="https://cdn.discordapp.com/embed/avatars/0.png";
 const LABEL={online:"ONLINE",idle:"IDLE",dnd:"DO NOT DISTURB",offline:"OFFLINE"};
-const people=[...(CFG.hvt||[]).map((u,i)=>({threat:10,...u,kind:"hvt",rank:i+1})),...(CFG.watch||[]).map((u,i)=>({threat:2,...u,kind:"sv",rank:i+1})),...CFG.mostWanted.map((u,i)=>({...u,kind:"mw",rank:i+1})),...CFG.wanted.map((u,i)=>({...u,kind:"w",rank:i+1}))];
+const people=[...CFG.mostWanted.map((u,i)=>({...u,kind:"mw",rank:i+1})),...CFG.wanted.map((u,i)=>({...u,kind:"w",rank:i+1}))];
 const byId=id=>people.find(u=>u.id===id);
 const parseB=s=>+String(s||"").replace(/\D/g,"")||0,TOTAL=people.reduce((a,u)=>a+parseB(u.bounty),0);
 $("#npt").textContent=CFG.musicTitle;
 
 /* ---------- views (walang page scroll) ---------- */
-const VIEWS=["home","hvt","mw","w","sv","srv"];
-const TN={hvt:"HIGH VALUE TARGET",mw:"MOST WANTED",w:"WANTED",sv:"UNDER SURVEILLANCE"};
+const VIEWS=["home","mw","w","hos","srv"];
+const TN={mw:"MOST WANTED",w:"WANTED"};
 const stars=t=>{const n=Math.min(10,Math.max(1,t||1));return Array.from({length:5},(_,k)=>`<i class="st ${n>=2*k+2?"f":n===2*k+1?"h":""}" style="--k:${k}">★</i>`).join("")};
 function go(v){
   if(!VIEWS.includes(v))v="home";
   $$(".view").forEach(e=>e.classList.toggle("on",e.id===v));
   $$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
-  history.replaceState(null,"","#"+v);
+  history.replaceState(null,"","#"+v);moveInd();
   const ab=$("#nav button.on");if(ab&&ab.scrollIntoView)try{ab.scrollIntoView({block:"nearest",inline:"center",behavior:"smooth"})}catch(e){}
 }
 document.addEventListener("click",e=>{
   const n=e.target.closest("[data-v],[data-go]");if(n){go(n.dataset.v||n.dataset.go);return}
   const nb=e.target.closest("[data-nav]");if(nb){nav(+nb.dataset.nav);return}
   if(e.target.closest("#mcp")){copyId();return}
-  const c=e.target.closest(".card");if(c){openFile(c.dataset.id);return}
+  const c=e.target.closest(".card");if(c){c.dataset.h!==undefined?openHos(+c.dataset.h):openFile(c.dataset.id);return}
   if(e.target.id==="modal"||e.target.closest("#mx"))closeFile();
 });
 const modalOn=()=>$("#modal").classList.contains("on");
@@ -83,23 +79,22 @@ function log(msg,cls){
 setInterval(()=>{$("#clk").textContent=new Date().toTimeString().slice(0,8)},1000);
 
 /* ---------- cards ---------- */
+const cn=u=>{const n=(u.name||"").trim();return /[\p{L}\p{N}]{2}/u.test(n)?n:(u.un||"").replace("@","")||u.id};
 function card(u,i){
   return `<button class="card offline ${u.kind}" id="u${u.id}" data-id="${u.id}" style="--i:${i}" aria-label="Open case file">
-  <div class="ph"><img alt="" src="${AV}"><b class="rk">${u.kind==="hvt"?"HVT ":""}#${pad(u.rank)}</b>${u.kind==="sv"?'<span class="rec"><i></i>REC</span>':""}${u.stamp?`<em class="stamp">${u.stamp}</em>`:""}<span class="stt"><i class="dot"></i><span class="stx sl">OFFLINE</span></span></div>
-  <div class="info"><div class="nm">${u.id}</div><div class="stars">${stars(u.threat)}</div><div class="sub"><span class="un">loading...</span><span class="bty">${u.bounty||""}</span></div></div></button>`;
+  <div class="ph"><img alt="" src="${AV}"><b class="rk">#${pad(u.rank)}</b><span class="stt"><i class="dot"></i><span class="stx sl">OFFLINE</span></span></div>
+  <div class="info"><div class="nm">${u.id}</div><div class="mrow"><div class="stars">${stars(u.threat)}</div><span class="bty">${u.bounty||""}</span></div><span class="un">loading...</span></div></button>`;
 }
 $("#gmw").innerHTML=people.filter(u=>u.kind==="mw").map(card).join("");
-$("#ghvt").innerHTML=people.filter(u=>u.kind==="hvt").map(card).join("");
-$("#gsv").innerHTML=people.filter(u=>u.kind==="sv").map(card).join("");
 $("#gw").innerHTML=people.filter(u=>u.kind==="w").map(card).join("");
 const EMPTY='<div class="empty">// NO TARGETS MATCH //</div>';
 const BLANK='<div class="empty e-blank">// NO ONE LISTED YET //<small>add a Discord ID to CFG.watch in app.js</small></div>';
-["#gmw","#gw","#gsv","#ghvt"].forEach(s=>{$(s).insertAdjacentHTML("beforeend",EMPTY+(s==="#gsv"||s==="#ghvt"?BLANK:""))});
+["#gmw","#gw"].forEach(s=>{$(s).insertAdjacentHTML("beforeend",EMPTY)});
 
 function paint(u){
   const el=document.getElementById("u"+u.id);if(!el)return;
   el.className="card "+(u.s||"offline");
-  el.querySelector(".nm").textContent=u.name||u.id;
+  el.querySelector(".nm").textContent=cn(u);
   el.querySelector(".un").textContent=u.un||"not tracked yet";
   if(u.img)el.querySelector("img").src=u.img;
   el.querySelector(".sl").textContent=LABEL[u.s]||"OFFLINE";
@@ -136,7 +131,7 @@ function fillFile(u){
   $("#mi").src=u.img||AV;
   $("#mr").textContent=(TN[u.kind]||"WANTED")+" #"+pad(u.rank);
   $("#mk").textContent=u.kind==="hvt"?"PRIORITY ONE":"CASE #"+pad(u.rank);
-  $("#mn").textContent=u.name||u.id;
+  $("#mn").textContent=cn(u);
   $("#mu").textContent=(u.un?u.un+" · ":"")+u.id;
   $("#ms").textContent=LABEL[u.s]||"OFFLINE";$("#ms").className="stx";
   $("#mb").textContent=u.bounty||"—";
@@ -220,7 +215,7 @@ function exit(){
   if(exited)return;exited=true;
   $("#gate").classList.add("out");document.body.classList.add("live");
   setTimeout(()=>$("#gate").remove(),1100);
-  go(location.hash.slice(1));initHero();refresh();setInterval(refresh,30000);
+  go(location.hash.slice(1));lay();initHero();refresh();setInterval(refresh,30000);
   countUp($("#hB"),TOTAL,money);typeTag();
 }
 $("#gate").addEventListener("click",()=>{userOff=false;au.muted=false;au.play().then(ui).catch(ui);if(ready)exit()});
@@ -316,7 +311,7 @@ function applyFlt(){
     const hay=((u.name||"")+" "+(u.un||"")+" "+u.id).toLowerCase();
     el.classList.toggle("hid",!((!q||hay.includes(q))&&(!flt.on||(u.s&&u.s!=="offline"))));
   });
-  ["#gmw","#gw","#gsv","#ghvt"].forEach(s=>{const g=$(s);g.classList.toggle("blank",!g.querySelector(".card"));g.classList.toggle("none",!!g.querySelector(".card")&&!g.querySelector(".card:not(.hid)"))});
+  ["#gmw","#gw"].forEach(s=>{const g=$(s);g.classList.toggle("blank",!g.querySelector(".card"));g.classList.toggle("none",!!g.querySelector(".card")&&!g.querySelector(".card:not(.hid)"))});
 }
 function syncQ(v){flt.q=v;$$(".q").forEach(i=>{if(i.value!==v)i.value=v});applyFlt()}
 $$(".q").forEach(i=>i.addEventListener("input",()=>syncQ(i.value)));
@@ -376,3 +371,46 @@ if(rm)fx.remove();else{
     requestAnimationFrame(f);
   })(performance.now());
 }
+
+
+/* =================== v6 =================== */
+function moveInd(){const b=$("#nav button.on"),i=$("#nvi");if(!b||!i)return;i.style.width=b.offsetWidth+"px";i.style.transform=`translateX(${b.offsetLeft}px)`}
+addEventListener("resize",moveInd);document.fonts&&document.fonts.ready.then(moveInd);setTimeout(moveInd,300);
+
+function lay(){
+  const set=(s,n)=>{const g=$(s),c=g.querySelectorAll(".card").length||1,cols=Math.max(1,Math.min(n,c));g.style.setProperty("--n",cols);g.style.setProperty("--rows",Math.ceil(c/cols))};
+  set("#gmw",3);set("#gw",2);
+}
+lay();addEventListener("resize",lay);
+
+(function(){
+  const b=$("#bgx");if(rm||!fine||!b)return;let tx=0,ty=0,cx=0,cy=0;
+  addEventListener("pointermove",e=>{tx=(e.clientX/innerWidth-.5)*-26;ty=(e.clientY/innerHeight-.5)*-18},{passive:true});
+  (function f(){cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;b.style.setProperty("--px",cx.toFixed(2)+"px");b.style.setProperty("--py",cy.toFixed(2)+"px");requestAnimationFrame(f)})();
+})();
+
+/* ---------- HOS (hostage): ikaw lang ang nagpo-post, via js/hostages.js ---------- */
+const HL=Array.isArray(window.HOS)?window.HOS:[],esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const LOCK='<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+const hmed=(p,full)=>p.video?`<video src="${esc(p.video)}${full?"":"#t=0.6"}" playsinline ${full?"controls autoplay loop":'muted preload="metadata"'}></video>`:p.image?`<img alt="" src="${esc(p.image)}">`:`<div class="hx">✝</div>`;
+const ghos=$("#ghos");
+ghos.innerHTML=HL.map((p,i)=>`<button class="card hos" data-h="${i}" style="--i:${i}" aria-label="Open sealed post"><div class="ph">${hmed(p,false)}<b class="rk">H-${pad(i+1)}</b><span class="lk">${LOCK}</span></div><div class="info"><div class="nm">▮▮▮▮ ▮▮▮▮▮</div><span class="un">SEALED · TAP TO OPEN</span></div></button>`).join("")+'<div class="empty">// WALA PANG HOSTAGE //<small>soon</small></div>';
+ghos.classList.toggle("none",!HL.length);
+let owner=null;
+async function getOwner(){if(owner)return owner;try{const r=await(await fetch("https://api.lanyard.rest/v1/users/"+CFG.owner)).json(),d=r.data.discord_user;owner={name:d.global_name||d.username,img:d.avatar?`https://cdn.discordapp.com/avatars/${CFG.owner}/${d.avatar}.png?size=64`:AV}}catch(e){owner={name:"OWNER",img:AV}}return owner}
+let hOpen=null;
+function openHos(i){
+  const p=HL[i];if(!p)return;hOpen=i;
+  $("#hbox").innerHTML=`<button class="x" id="hx" aria-label="Close">✕</button><div class="seal"><div class="lk big">${LOCK}</div><div class="mt">H-${pad(i+1)} · SEALED</div><p>May nakatagong laman. Buksan para makita.</p><button class="btn" id="unseal">UNSEAL &gt;</button></div>`;
+  $("#hm").classList.add("on");$("#hm").setAttribute("aria-hidden","false");
+  if(coarse&&navigator.vibrate)navigator.vibrate(8);
+  $("#unseal").onclick=async()=>{
+    const o=await getOwner();if(hOpen!==i)return;
+    $("#hbox").innerHTML=`<button class="x" id="hx" aria-label="Close">✕</button><div class="rev">${p.video||p.image?`<div class="hmed">${hmed(p,true)}</div>`:""}<div class="hbd"><div class="mt">H-${pad(i+1)}${p.date?" · "+esc(p.date):""}</div>${p.name?`<div class="mn">${esc(p.name)}</div>`:""}${p.note?`<p class="hn">${esc(p.note)}</p>`:""}<div class="by"><img alt="" src="${o.img}"><span>POSTED BY <b>${esc(o.name)}</b></span></div></div></div>`;
+    $("#hx").onclick=closeHos;
+  };
+  $("#hx").onclick=closeHos;
+}
+function closeHos(){hOpen=null;$("#hm").classList.remove("on");$("#hm").setAttribute("aria-hidden","true");setTimeout(()=>{if(hOpen===null)$("#hbox").innerHTML=""},350)}
+$("#hm").addEventListener("click",e=>{if(e.target.id==="hm")closeHos()});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&hOpen!==null)closeHos()});
