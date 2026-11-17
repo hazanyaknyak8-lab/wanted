@@ -390,7 +390,7 @@ async function getOwner(){if(owner)return owner;try{const r=await(await fetch("h
 let hOpen=null;
 function openHos(i){
   const p=HL[i];if(!p)return;hOpen=i;
-  $("#hbox").innerHTML=`<button class="x" id="hx" aria-label="Close">✕</button><div class="seal"><div class="lk big">${LOCK}</div><div class="mt">H-${pad(i+1)} · SEALED</div><p>May nakatagong laman. Buksan para makita.</p><button class="btn" id="unseal">UNSEAL &gt;</button></div>`;
+  $("#hbox").innerHTML=`<button class="x" id="hx" aria-label="Close">✕</button><div class="seal"><div class="lk big">${LOCK}</div><div class="mt">H-${pad(i+1)} · SEALED</div><p>buksan mo para makita mo, tanginamo.</p><button class="btn" id="unseal">UNSEAL &gt;</button></div>`;
   $("#hm").classList.add("on");$("#hm").setAttribute("aria-hidden","false");
   if(coarse&&navigator.vibrate)navigator.vibrate(8);
   $("#unseal").onclick=async()=>{
