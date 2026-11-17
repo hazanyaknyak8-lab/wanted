@@ -6,12 +6,12 @@ const CFG={
 
   mostWanted:[
     {id:"1530686788824469646",bounty:"₱69,000,000",threat:10,reason:"hari ng lahat"},
+    {id:"1147462845315952690",bounty:"₱350,000",threat:6,reason:""},
     {id:"1499499066932068454",bounty:"₱750,000",threat:9,reason:""},
     {id:"1556911422091427910",bounty:"₱600,000",threat:8,reason:""},
     {id:"1544422656852627496",bounty:"₱500,000",threat:8,reason:""},
     {id:"1546289969960587270",bounty:"₱450,000",threat:7,reason:"nanununtok ng tanga"},
     {id:"1441623190412726355",bounty:"₱400,000",threat:7,reason:"."},
-    {id:"1147462845315952690",bounty:"₱350,000",threat:6,reason:""}
   ],
   wanted:[
     {id:"909977852378763264",bounty:"₱1200,000",threat:4,reason:""},
