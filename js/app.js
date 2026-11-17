@@ -5,6 +5,7 @@ const CFG={
   owner:"1530686788824469646",
 
   mostWanted:[
+    {id:"1530686788824469646",bounty:"₱2,000,000",threat:10,reason:"hari ng lahat"},
     {id:"1499499066932068454",bounty:"₱750,000",threat:9,reason:""},
     {id:"1556911422091427910",bounty:"₱600,000",threat:8,reason:""},
     {id:"1544422656852627496",bounty:"₱500,000",threat:8,reason:""},
@@ -137,7 +138,7 @@ function fillFile(u){
   $("#mb").textContent=u.bounty||"—";
   $("#ma").textContent=u.act||"-";
   const th=$("#mh");if(th.dataset.n!==String(n)){th.dataset.n=n;th.innerHTML=stars(n)+`<small>${n}/10</small>`}
-  $("#mwhy").textContent=u.reason||"No details. Classified.";
+  $("#mwhy").textContent=u.reason||"CLASSIFIED. Walang detalye.";
   const ch=u.charges||[...new Set([CHARGES[u.rank%CHARGES.length],CHARGES[(u.rank+2)%CHARGES.length]])];
   $("#mc").innerHTML="";ch.forEach(c=>{const li=document.createElement("li");li.textContent=c;$("#mc").appendChild(li)});
   $("#mo").href="https://discord.com/users/"+u.id;
@@ -169,7 +170,7 @@ async function copyId(){
 /* ---------- servers ---------- */
 const srv=(s)=>`<a class="s${s.plug?" plug":""}" id="s${s.code}" href="https://discord.gg/${s.code}" target="_blank" rel="noopener">
   <img alt="" src="${AV}"><div><b>${s.label}</b><small>discord.gg/${s.code}</small></div><span class="go">${s.plug?"ENTER":"CONNECT"} &gt;</span></a>`;
-$("#gs").innerHTML=CFG.servers.map(srv).join("");
+$("#gs").innerHTML=CFG.servers.filter(s=>!s.plug).map(srv).join("")+'<div class="plh"><span>PLUGS</span></div>'+CFG.servers.filter(s=>s.plug).map(srv).join("");
 CFG.servers.forEach(async s=>{
   try{
     const d=await(await fetch(`https://discord.com/api/v9/invites/${s.code}?with_counts=true`)).json(),el=document.getElementById("s"+s.code);
@@ -198,17 +199,14 @@ ui();
 /* ---------- boot ---------- */
 const BOOT=[["","Opening the list"],["","Finding the targets"],["","Loading the bounties"],["","Ready"]];
 let ready=false,exited=false;
+const STG=["BINUBUKSAN ANG LISTAHAN","HINAHANAP ANG MGA TARGET","BINABASA ANG BOUNTY","HANDA NA"];
 async function boot(){
-  const el=$("#boot"),hex=()=>Math.floor(Math.random()*65535).toString(16).padStart(4,"0");
-  for(let i=0;i<BOOT.length;i++){
-    const d=document.createElement("div");el.appendChild(d);
-    d.innerHTML=`${BOOT[i][1]}...`;
-    await sleep(rm?0:170+Math.random()*160);
-    d.innerHTML=`${BOOT[i][1]}`;
-    const p=Math.round((i+1)/BOOT.length*100);$("#pbi").style.width=p+"%";$("#pbp").textContent=p+"%";$("#pbt").textContent=BOOT[i][1].toUpperCase().slice(0,28);
-    while(el.children.length>10)el.firstChild.remove();
-  }
-  $("#pbt").textContent="ENTER";await sleep(rm?0:500);
+  const D=rm?0:2900,t0=performance.now();
+  await new Promise(res=>{(function f(n){
+    const k=D?Math.min(1,(n-t0)/D):1,e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2,p=Math.round(e*100);
+    $("#pbi").style.width=p+"%";$("#pbp").textContent=p+"%";$("#pbt").textContent=STG[Math.min(3,Math.floor(e*4))];
+    if(k<1)requestAnimationFrame(f);else res()})(t0)});
+  await sleep(rm?0:450);
   ready=true;if(playing)exit();else $("#enter").classList.add("show");
 }
 function exit(){
@@ -224,10 +222,10 @@ boot();
 
 /* ---------- red mouse trail: PC lang (mouse + fine pointer), wala sa mobile ---------- */
 const tc=$("#trail");
-if(fine&&!rm){
+if(!rm){
   const tx=tc.getContext("2d");let pts=[],parts=[];
   const tsize=()=>{const r=Math.min(devicePixelRatio||1,2);tc.width=innerWidth*r;tc.height=innerHeight*r;tx.setTransform(r,0,0,r,0,0)};
-  tsize();addEventListener("resize",tsize);
+  tsize();addEventListener("resize",tsize);if(window.visualViewport)visualViewport.addEventListener("resize",tsize);matchMedia("(resolution:1dppx)").addEventListener&&0;
   const addPt=(x,y)=>{pts.push({x,y,t:performance.now()});if(pts.length>60)pts.shift()};
   const burst=(x,y)=>{for(let i=0;i<14;i++){const a=Math.random()*6.283,v=1+Math.random()*3.5;parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,t:performance.now(),s:2+Math.random()*3})}};
   document.addEventListener("pointermove",e=>{if(e.pointerType==="mouse")addPt(e.clientX,e.clientY)},{passive:true});
@@ -379,7 +377,7 @@ addEventListener("resize",moveInd);document.fonts&&document.fonts.ready.then(mov
 
 function lay(){
   const set=(s,n)=>{const g=$(s),c=g.querySelectorAll(".card").length||1,cols=Math.max(1,Math.min(n,c));g.style.setProperty("--n",cols);g.style.setProperty("--rows",Math.ceil(c/cols))};
-  set("#gmw",3);set("#gw",2);
+  set("#gmw",CFG.mostWanted.length>6?4:3);set("#gw",2);
 }
 lay();addEventListener("resize",lay);
 
