@@ -6,4 +6,5 @@
 */
 window.HOS=[
    {name:"LUCI BADAP", note:"HINDI MARUNONG MAGMAHAL", date:"NOV 78 3084"},
+   {name:"RIAN BADAP", note:"TOKNENENG", date:"FEB 92 1873"},
 ];
