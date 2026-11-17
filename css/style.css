@@ -554,3 +554,75 @@ html.hasbg #bgx .g{opacity:.38}
 .thr .st.f{color:var(--red)!important;text-shadow:0 0 12px #e8101e}
 .thr .st.h{background:linear-gradient(90deg,var(--red) 50%,#3a1013 50%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
 .thr small{font:400 14px var(--disp);letter-spacing:.1em;color:var(--mut);margin-left:4px}
+
+
+/* ================= v9: MOBILE layout ================= */
+@media (max-width:640px){
+  #tick,#logp{display:none}
+  #top{padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px}
+  .view{padding:12px 12px calc(76px + env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .head{margin-bottom:12px}
+  .head h2{font-size:28px}
+
+  /* bottom nav: kasya ang 5 tabs */
+  #nav button{flex:1 1 auto;padding:15px 4px;font-size:12px;letter-spacing:.03em}
+
+  /* home */
+  .hero{gap:12px;justify-content:flex-start;padding-top:6px}
+  .hud{gap:6px}.hud span{padding:6px 9px;font-size:12px;letter-spacing:.08em}
+  .cta{width:100%}.cta .btn{flex:1 1 100%;padding:14px}
+  .fq{font-size:20px;gap:8px;margin-top:14px}
+
+  /* cards: 2 columns, scroll kapag marami */
+  #gmw,#gw{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;margin:0}
+  #gmw .card,#gw .card{width:auto}
+  #gmw .card:first-child{--fh:128px;grid-column:1/-1}
+  #gmw .card:first-child .info{padding:10px 14px;gap:4px}
+  #gmw .card:first-child .nm{font-size:26px}
+  #gmw .card:first-child .bty{font-size:26px}
+  #gmw .card:first-child .stars{font-size:16px}
+  #gmw .card:first-child .un{font-size:13px}
+  .ph{aspect-ratio:1/.92}
+  .info{padding:9px 10px 11px}
+  .nm{font-size:18px}
+  .mrow .bty{font-size:16px}
+  .info .un{font-size:12px}
+  .flt{margin:0 0 10px;gap:6px}
+  .chip{font-size:12px;padding:9px 10px}
+
+  /* hostage grid */
+  .grid.hg{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%}
+
+  /* hideouts */
+  .srvs{gap:10px}
+  .s:not(.plug){padding:18px 16px}
+  .s:not(.plug) img{width:54px;height:54px}.s:not(.plug) b{font-size:20px}
+  .s.plug{padding:12px 14px}.s.plug b{font-size:17px}
+  .s{gap:12px}.s img{width:46px;height:46px}.s small{font-size:13px}
+  .s .go{font-size:12px;letter-spacing:.1em}
+
+  /* case file: bottom sheet */
+  #modal{padding:0;place-items:end center}
+  .file{width:100%;max-height:92dvh;grid-template-rows:150px minmax(0,1fr);border-radius:16px 16px 0 0;border-bottom:0;transform:translateY(40px)}
+  #modal.on .file{transform:none}
+  .file .ph{min-height:0}
+  .fb{padding:14px 14px calc(14px + env(safe-area-inset-bottom,0px));gap:8px}
+  .mn{font-size:30px}
+  .row{font-size:13px;gap:8px}.row span{width:64px}
+  #mb{font-size:28px}
+  .thr .st{font-size:22px}
+  .why{padding:12px}.why p{font-size:15px}.why li{font-size:12px}
+  .acts{flex-wrap:wrap}
+  .acts .nb{flex:1;min-height:44px}
+  .acts .btn{order:5;flex:1 1 100%;min-height:48px}
+
+  /* hostage popup */
+  #hm{padding:10px}
+  .hmed video,.hmed img{max-height:52dvh}
+  .seal{padding:34px 16px 28px}
+}
+@media (max-width:360px){
+  #nav button{font-size:11px;padding:15px 2px;letter-spacing:0}
+  #gmw .card:first-child{--fh:108px}
+  #gmw .card:first-child .nm{font-size:22px}
+}
