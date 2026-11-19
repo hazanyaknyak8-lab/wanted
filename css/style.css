@@ -1,4 +1,4 @@
-/* WANTED v11 — isang malinis na stylesheet (pinalitan ang v3–v10 na patong-patong) */
+/* WANTED v12 — isang malinis na stylesheet (pinalitan ang v3–v10 na patong-patong) */
 
 :root{
   --bg:#0a0607;--bg2:#10080a;--card:#150c0e;--card2:#1d1215;
@@ -8,7 +8,7 @@
   --ok:#3ba55d;--idle:#faa61a;--dnd:#ed4245;
   --disp:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
   --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --black:"Pirata One","UnifrakturCook",Georgia,serif;
+  --black:"Grenze Gotisch","UnifrakturCook",Georgia,serif;
   --ease:cubic-bezier(.22,.9,.3,1);--ease-io:cubic-bezier(.4,0,.2,1);
   --star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z'/%3E%3C/svg%3E");
   --wrap:1120px;
@@ -373,3 +373,136 @@ main{position:relative;z-index:1;min-height:0}
   *,*::before,*::after{animation:none!important;transition-duration:.01s!important;transition-delay:0s!important}
   .gt{opacity:1}#enter{opacity:1}
 }
+
+
+/* ================= v12 ================= */
+/* fonts: iisang blackletter (logo/gate/quote), iisang condensed (lahat ng heading) */
+.gt,.logo,.brand,.fq{font-weight:800;letter-spacing:.02em}
+.gt{font-size:clamp(64px,19vw,200px)}
+.logo{will-change:transform}
+.nm,.bty,.head h2,.hud b,#mb,.mn{font-weight:800;font-family:var(--disp)}
+
+/* gate: walang glitch (opacity + transform lang, walang animated shadow/blur) */
+.gt{transform:translateZ(0);backface-visibility:hidden;will-change:opacity,transform;
+  text-shadow:0 3px 0 var(--deep),0 0 60px rgba(214,25,43,.4)}
+html.fr .gt{animation:gin 1s var(--ease) forwards}
+@keyframes gin{from{opacity:0;transform:translateY(10px) scale(1.03)}to{opacity:1;transform:none}}
+#enter{margin-top:26px;font:600 11px var(--sans);letter-spacing:.42em;padding-left:.42em;text-transform:uppercase;color:var(--mut)}
+
+/* gumagalaw na WANTED logo */
+.logo{transform:perspective(900px) rotateX(var(--ly,0deg)) rotateY(var(--lx,0deg));transform-style:preserve-3d;transition:text-shadow .4s}
+.logo.mv{text-shadow:0 6px 0 var(--deep),0 0 100px rgba(240,64,79,.55)}
+
+/* cards: tilt + spotlight, mas smooth */
+.card{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;will-change:transform;
+  transition:transform .22s var(--ease),border-color .35s,box-shadow .45s}
+.card::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .35s;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(240,64,79,.2),transparent 65%)}
+.card.lead::before{background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(220,184,112,.18),transparent 65%)}
+@media (hover:hover){
+  .card:hover{transform:perspective(900px) translateY(-4px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+  .card:hover::before{opacity:1}
+}
+.card:active{transform:perspective(900px) scale(.98)}
+
+/* pagbukas ng pages: blur + slide, staggered na labas ng cards */
+.view{will-change:opacity,transform;transform:translateY(18px) scale(.995);filter:blur(6px);
+  transition:opacity .3s var(--ease-io),transform .6s var(--ease),filter .45s var(--ease-io),visibility 0s .3s}
+.view.on{transform:none;filter:none}
+.view.on .card,.view.on .s,.view.on .hud>div{animation:cin .7s var(--ease) backwards}
+@keyframes cin{from{opacity:0;transform:translateY(22px) scale(.97)}}
+.view.on .grid>:nth-child(1),.view.on .srvs>:nth-child(1){animation-delay:115ms}
+.view.on .grid>:nth-child(2),.view.on .srvs>:nth-child(2){animation-delay:170ms}
+.view.on .grid>:nth-child(3),.view.on .srvs>:nth-child(3){animation-delay:225ms}
+.view.on .grid>:nth-child(4),.view.on .srvs>:nth-child(4){animation-delay:280ms}
+.view.on .grid>:nth-child(5),.view.on .srvs>:nth-child(5){animation-delay:335ms}
+.view.on .grid>:nth-child(6),.view.on .srvs>:nth-child(6){animation-delay:390ms}
+.view.on .grid>:nth-child(7),.view.on .srvs>:nth-child(7){animation-delay:445ms}
+.view.on .grid>:nth-child(8),.view.on .srvs>:nth-child(8){animation-delay:500ms}
+.view.on .grid>:nth-child(9),.view.on .srvs>:nth-child(9){animation-delay:555ms}
+.view.on .grid>:nth-child(10),.view.on .srvs>:nth-child(10){animation-delay:610ms}
+.view.on .grid>:nth-child(11),.view.on .srvs>:nth-child(11){animation-delay:665ms}
+.view.on .grid>:nth-child(12),.view.on .srvs>:nth-child(12){animation-delay:720ms}
+.view.on .grid>:nth-child(13),.view.on .srvs>:nth-child(13){animation-delay:775ms}
+.view.on .grid>:nth-child(14),.view.on .srvs>:nth-child(14){animation-delay:830ms}
+.view.on .hud>div:nth-child(1){animation-delay:.1s}.view.on .hud>div:nth-child(2){animation-delay:.18s}.view.on .hud>div:nth-child(3){animation-delay:.26s}.view.on .hud>div:nth-child(4){animation-delay:.34s}
+
+/* popups + buttons: mas smooth */
+#modal,#hm{backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);transition:opacity .35s var(--ease-io),backdrop-filter .45s,-webkit-backdrop-filter .45s,visibility 0s .35s}
+#modal.on,#hm.on{backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.file,.hb2{opacity:0;transform:translateY(34px) scale(.95);transition:transform .65s var(--ease),opacity .4s var(--ease-io)}
+#modal.on .file,#hm.on .hb2{opacity:1;transform:none}
+.btn,.nb,.chip,.s,.s .go{transition-duration:.35s;transition-timing-function:var(--ease)}
+@media (hover:hover){.btn:hover{transform:translateY(-2px)}}
+#nav button{transition:color .35s var(--ease-io),transform .25s var(--ease)}
+#nvi{transition:transform .6s var(--ease),width .6s var(--ease)}
+@media (max-width:720px){.file{transform:translateY(80px)}#modal.on .file{transform:none}}
+@media (prefers-reduced-motion:reduce){.view{filter:none}}
+.kl{font:800 13px var(--sans);letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#fff3cf,var(--gold),#fff3cf);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:kls 4.5s linear infinite}
+@keyframes kls{to{background-position:-220% 0}}
+
+
+/* ================= v13 ================= */
+/* --- cursor: krus (walang trail) --- */
+@media (hover:hover) and (pointer:fine){
+  *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='32' viewBox='0 0 20 32'%3E%3Cpath d='M8 1h4v6h6v4h-6v20H8V11H2V7h6z' fill='white' stroke='black' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") 10 9,auto}
+  a,button,[role=button],.card,.chip,.btn,.nb,.s,#gate,#vol,#mute,.x{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='32' viewBox='0 0 20 32'%3E%3Cpath d='M8 1h4v6h6v4h-6v20H8V11H2V7h6z' fill='%23f0404f' stroke='black' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") 10 9,pointer}
+  input[type=search]{cursor:text}
+}
+
+/* --- fonts: Cinzel sa headings/pangalan, blackletter sa WANTED lang, Big Shoulders sa numero --- */
+.head h2{font-family:"Cinzel",Georgia,serif;font-weight:800;font-size:clamp(28px,4vw,42px);letter-spacing:.08em}
+.nm{font-family:"Cinzel",Georgia,serif;font-weight:700;font-size:17px;letter-spacing:.05em}
+.card.lead .nm{font-size:clamp(28px,4.2vw,52px);letter-spacing:.04em}
+.mn{font-family:"Cinzel",Georgia,serif;font-weight:800;font-size:clamp(26px,3.8vw,42px);letter-spacing:.05em}
+.s b{font-family:"Cinzel",Georgia,serif;font-weight:700;font-size:19px;letter-spacing:.06em}
+.s:not(.plug) b{font-size:26px}
+.bty,.hud b,#mb{font-family:var(--disp)}
+.btn,.chip,.nb,#nav button{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.hud span,.stat,.head em{letter-spacing:.06em}
+
+/* --- buttons: umiikot na puti/pulang kinang --- */
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes shine{to{--a:360deg}}
+.btn,.nb,.chip,.s .go,#mute,#enter.show{position:relative;isolation:isolate}
+.btn::after,.nb::after,.chip::after,.s .go::after,#mute::after,#enter.show::after,#nav button.on::after{
+  content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:2;
+  background:conic-gradient(from var(--a),transparent 0 62%,rgba(255,255,255,.95) 80%,var(--red2) 92%,transparent 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);mask-composite:exclude;
+  animation:shine 3.4s linear infinite}
+.btn{box-shadow:0 0 26px rgba(214,25,43,.32)}
+@media (hover:hover){.btn:hover::after,.nb:hover::after,.chip:hover::after,.s .go:hover::after{animation-duration:1.4s}.btn:hover{box-shadow:0 0 36px rgba(240,64,79,.5)}}
+.chip.on::after{background:conic-gradient(from var(--a),transparent 0 40%,#fff 70%,var(--red2) 90%,transparent 100%)}
+#nav button.on{border-radius:8px}
+#enter.show{display:inline-block;padding:13px 30px;border-radius:999px;font-size:11px;color:var(--ink);background:rgba(10,6,7,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+
+/* --- intro: anghel sa background --- */
+#gate{background:#050202}
+#gate::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transform:scale(1.06);
+  background:linear-gradient(90deg,rgba(5,2,3,.7),rgba(5,2,3,.15) 60%,rgba(5,2,3,.35)),url(../img/angel.jpg) 74% 40%/cover no-repeat;
+  transition:opacity 2s var(--ease-io),transform 14s linear}
+html.fr #gate::before{opacity:1;transform:scale(1)}
+#gate::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.75))}
+.gw{position:relative;z-index:2}
+@media (min-width:900px){.gw{margin-right:30vw}}
+
+/* --- WANTED: kamay art (Creation of Adam) na dahan-dahang nagkakalapit --- */
+#home::before,#home::after{content:"";position:absolute;top:50%;z-index:-1;pointer-events:none;width:min(44vw,540px);aspect-ratio:368/250;
+  background:center/contain no-repeat;opacity:.5}
+#home::before{left:0;background-image:url(../img/hand-l.png);animation:hl 7s ease-in-out infinite alternate}
+#home::after{right:0;background-image:url(../img/hand-r.png);animation:hr 7s ease-in-out infinite alternate}
+@keyframes hl{from{transform:translate(-18px,-60%)}to{transform:translate(16px,-60%)}}
+@keyframes hr{from{transform:translate(18px,-60%)}to{transform:translate(-16px,-60%)}}
+@media (max-width:720px){#home::before,#home::after{opacity:.32;top:44%}}
+@media (prefers-reduced-motion:reduce){.btn::after,.nb::after,.chip::after,.s .go::after,#mute::after,#enter.show::after,#nav button.on::after{animation:none}#home::before,#home::after{animation:none}}
+
+/* v13 tweak: mas kita ang anghel */
+#gate::before{filter:brightness(1.9) contrast(1.15) saturate(1.1);
+  background:linear-gradient(90deg,rgba(5,2,3,.5),rgba(5,2,3,0) 55%),url(../img/angel.jpg) 74% 40%/cover no-repeat}
+#gate::after{background:radial-gradient(ellipse at 60% 50%,transparent 55%,rgba(0,0,0,.6))}
+@media (min-width:900px){.gt{font-size:clamp(90px,11.5vw,170px)}.gw{margin-right:26vw}}
+#gate::before{filter:brightness(1.4) contrast(1.1)}
+@media (min-width:900px){.gw{margin-right:34vw}}
+#home::before,#home::after{opacity:.4}
+#enter.show{color:#fff;background:rgba(10,6,7,.6)}
