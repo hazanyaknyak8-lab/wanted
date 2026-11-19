@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>WANTED</title>
 <meta name="description" content="hindi kana dapat kilalanin pa, tatlong krus para sayo">
-<meta name="theme-color" content="#ff1f2d">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23050102'/%3E%3Cpath d='M28 8h8v16h16v8H36v24h-8V32H12v-8h16z' fill='%23ff1f2d'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0607">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0607'/%3E%3Cpath d='M28 8h8v16h16v8H36v24h-8V32H12v-8h16z' fill='%23d6192b'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="WANTED">
 <meta property="og:title" content="WANTED">
@@ -14,75 +14,91 @@
 <meta property="og:image" content="https://want3d.vercel.app/thumb.jpg">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Orbitron:wght@700;900&family=JetBrains+Mono:wght@700&family=Barlow+Condensed:wght@500;600;700&family=Pirata+One&family=Grenze+Gotisch:wght@600;800&display=swap">
-<link rel="stylesheet" href="css/style.css?v=10">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:wght@400;500;600;700&family=Pirata+One&display=swap">
+<link rel="stylesheet" href="css/style.css?v=11">
 </head>
 <body>
-<div id="bgx"><b class="g"></b><b class="t"></b><b class="s s1"></b><b class="s s2"></b><b class="v"></b></div>
-<canvas id="fx"></canvas>
-<canvas id="trail"></canvas>
+<div id="bgx" aria-hidden="true"><b class="g"></b><b class="t"></b></div>
 
-<div id="gate"><div class="gw"><div class="gt">WANTED</div><div id="enter">TAP TO CONTINUE</div></div></div>
+<div id="gate"><div class="gw"><div class="gt">WANTED</div><div id="enter">Tap to continue</div></div></div>
 
 <header id="top" class="off">
   <div class="brand">WANTED</div>
-  <nav id="nav">
-    <i id="nvi"></i><button data-v="home" class="on"><b>HOME</b></button><button data-v="mw"><b>MOST WANTED</b></button><button data-v="w"><b>WANTED</b></button><button data-v="hos"><b>HOS</b></button><button data-v="srv"><b>HIDEOUTS</b></button>
+  <nav id="nav" aria-label="Main">
+    <i id="nvi"></i><button data-v="home" class="on">Home</button><button data-v="mw">Most wanted</button><button data-v="w">Wanted</button><button data-v="hos">HOS</button><button data-v="srv">Hideouts</button>
   </nav>
-  <div class="pl"><div class="bars"><i></i><i></i><i></i><i></i></div><span id="npt">NOW PLAYING</span><input id="vol" type="range" min="0" max="100" value="50" aria-label="Volume"><button id="mute" aria-label="Mute or unmute music">♪</button></div>
+  <div class="pl">
+    <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <span id="npt">Now playing</span>
+    <input id="vol" type="range" min="0" max="100" value="50" aria-label="Volume">
+    <button id="mute" aria-label="Mute or unmute music">
+      <svg class="i-on" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+      <svg class="i-off" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/></svg>
+    </button>
+  </div>
 </header>
-<div id="tick" aria-hidden="true"><div class="tk" id="tk"></div></div>
 
 <main>
   <section class="view on" id="home">
     <div class="hero">
-      <div class="stat">● AT LARGE &nbsp;<span id="clk">00:00:00</span></div>
-      <div class="hb"><b class="c c1"></b><b class="c c2"></b><b class="c c3"></b><b class="c c4"></b><canvas id="hero" role="img" aria-label="WANTED"></canvas></div>
+      <div class="stat"><i class="pulse"></i>At large <span id="clk">00:00:00</span></div>
+      <h1 class="logo">WANTED</h1>
       <p class="tagl">hindi kana dapat kilalanin pa, tatlong krus para sayo</p>
-      <div class="hud"><span>TARGETS <b id="hT">0</b></span><span>ONLINE <b id="hO">0</b></span><span>SERVERS <b id="hS">0</b></span><span>BOUNTY <b id="hB">₱0</b></span></div>
-      <div class="cta"><button class="btn" data-go="mw">VIEW MOST WANTED &gt;</button><button class="btn ghost" data-go="srv">HIDEOUTS</button></div>
+      <div class="hud">
+        <div><b id="hT">0</b><span>Targets</span></div>
+        <div><b id="hO">0</b><span>Online</span></div>
+        <div><b id="hS">0</b><span>Servers</span></div>
+        <div><b id="hB">₱0</b><span>Total bounty</span></div>
+      </div>
+      <div class="cta"><button class="btn" data-go="mw">View most wanted</button><button class="btn ghost" data-go="srv">Hideouts</button></div>
     </div>
-    <div id="logp"><div class="lh">LIVE FEED <em>● LIVE</em></div><div id="log"></div></div>
+    <div id="logp"><div class="lh">Live feed <em><i class="pulse"></i>Live</em></div><div id="log"></div></div>
     <div class="fq"><span class="cr">✝ ✝ ✝</span>hindi kana dapat sambahin pa, tanginaka</div>
   </section>
 
   <section class="view" id="mw">
-    <div class="head"><h2>MOST WANTED</h2><em>TAP A TARGET FOR THE CASE FILE</em></div>
-    <div class="flt"><label class="srch"><span>⌕</span><input class="q" type="search" placeholder="SEARCH TARGET" autocomplete="off" spellcheck="false" aria-label="Search target"></label><button class="chip" data-f="on" aria-pressed="false">● ONLINE ONLY</button></div>
+    <div class="head"><h2>Most wanted</h2><em>Tap a card to open the case file</em></div>
+    <div class="flt"><label class="srch"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="q" type="search" placeholder="Search a target" autocomplete="off" spellcheck="false" aria-label="Search target"></label><button class="chip" data-f="on" aria-pressed="false"><i class="dot"></i>Online only</button></div>
     <div class="grid" id="gmw"></div>
   </section>
 
   <section class="view" id="w">
-    <div class="head"><h2>WANTED</h2><em>STILL ON THE RUN</em></div>
-    <div class="flt"><label class="srch"><span>⌕</span><input class="q" type="search" placeholder="SEARCH TARGET" autocomplete="off" spellcheck="false" aria-label="Search target"></label><button class="chip" data-f="on" aria-pressed="false">● ONLINE ONLY</button></div>
-    <div class="grid two" id="gw"></div>
+    <div class="head"><h2>Wanted</h2><em>Still on the run</em></div>
+    <div class="flt"><label class="srch"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="q" type="search" placeholder="Search a target" autocomplete="off" spellcheck="false" aria-label="Search target"></label><button class="chip" data-f="on" aria-pressed="false"><i class="dot"></i>Online only</button></div>
+    <div class="grid" id="gw"></div>
   </section>
 
   <section class="view" id="hos">
-    <div class="head"><h2>HOSTAGE</h2><em>SEALED · TAP TO OPEN</em></div>
+    <div class="head"><h2>Hostage</h2><em>Sealed. Tap to open</em></div>
     <div class="grid hg" id="ghos"></div>
   </section>
 
   <section class="view" id="srv">
-    <div class="head"><h2>HIDEOUTS</h2><em>ESTABLISH CONNECTION</em></div>
+    <div class="head"><h2>Hideouts</h2><em>Pick a server to join</em></div>
     <div class="srvs" id="gs"></div>
   </section>
 </main>
 
 <div id="modal" aria-hidden="true">
   <div class="file" role="dialog" aria-modal="true" aria-label="Case file">
-    <button class="x" id="mx" aria-label="Close">✕</button>
-    <div class="ph"><img id="mi" alt=""><b class="rk" id="mr"></b></div>
+    <button class="x" id="mx" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="ph"><img id="mi" alt="" onload="this.classList.add('ok')" onerror="this.classList.add('ok')"><b class="rk" id="mr"></b></div>
     <div class="fb">
       <div class="mt" id="mk"></div>
       <div class="mn" id="mn"></div>
       <div class="sub" id="mu"></div>
-      <div class="row"><span>STATUS</span><b><i class="dot"></i><span id="ms"></span></b></div>
-      <div class="row"><span>BOUNTY</span><b class="bty" id="mb"></b></div>
-      <div class="row"><span>DOING</span><b id="ma"></b></div>
-      <div class="row"><span>THREAT</span><b class="thr" id="mh"></b></div>
-      <div class="why"><span>WANTED FOR</span><p id="mwhy"></p><ul id="mc"></ul></div>
-      <div class="acts"><button class="nb" data-nav="-1" aria-label="Previous target">‹</button><button class="nb cp" id="mcp">COPY ID</button><a class="btn" id="mo" target="_blank" rel="noopener">OPEN DISCORD &gt;</a><button class="nb" data-nav="1" aria-label="Next target">›</button></div>
+      <div class="row"><span>Status</span><b><i class="dot"></i><span id="ms"></span></b></div>
+      <div class="row"><span>Bounty</span><b class="bty" id="mb"></b></div>
+      <div class="row"><span>Doing</span><b id="ma"></b></div>
+      <div class="row"><span>Threat</span><b class="thr" id="mh"></b></div>
+      <div class="why"><span>Wanted for</span><p id="mwhy"></p><ul id="mc"></ul></div>
+      <div class="acts">
+        <button class="nb" data-nav="-1" aria-label="Previous target"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>
+        <button class="nb cp" id="mcp">Copy ID</button>
+        <a class="btn" id="mo" target="_blank" rel="noopener">Open Discord</a>
+        <button class="nb" data-nav="1" aria-label="Next target"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button>
+      </div>
     </div>
   </div>
 </div>
@@ -91,7 +107,7 @@
 
 <div id="toasts" aria-live="polite"></div>
 
-<script src="js/hostages.js?v=10"></script>
-<script src="js/app.js?v=10"></script>
+<script src="js/hostages.js?v=11"></script>
+<script src="js/app.js?v=11"></script>
 </body>
 </html>
