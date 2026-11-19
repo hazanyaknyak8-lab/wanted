@@ -385,7 +385,7 @@ const HL=Array.isArray(window.HOS)?window.HOS:[],esc=s=>String(s||"").replace(/[
 const LOCK='<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
 const hmed=(p,full)=>p.video?`<video src="${esc(p.video)}${full?"":"#t=0.6"}" playsinline ${full?"controls autoplay loop":'muted preload="metadata"'}></video>`:p.image?`<img alt="" src="${esc(p.image)}">`:`<div class="hx">✝</div>`;
 const ghos=$("#ghos");
-ghos.innerHTML=HL.map((p,i)=>`<button class="card hos" data-h="${i}" style="--i:${i}" aria-label="Open sealed post"><div class="ph">${hmed(p,false)}<b class="rk">H-${pad(i+1)}</b><span class="lk">${LOCK}</span></div><div class="info"><div class="nm">▮▮▮▮ ▮▮▮▮▮</div><span class="un">SEALED · TAP TO OPEN</span></div></button>`).join("")+'<div class="empty">// WALA PANG HOSTAGE //<small>soon</small></div>';
+ghos.innerHTML=HL.map((p,i)=>`<button class="card hos" data-h="${i}" style="--i:${i}" aria-label="Open sealed post"><div class="ph">${hmed(p,false)}<b class="rk">H-${pad(i+1)}</b><span class="lk">${LOCK}</span></div><div class="info"><div class="nm">▮▮▮▮ ▮▮▮▮▮</div><span class="un">SEALED · TAP TO OPEN</span></div></button>`).join("")+'<div class="empty">// wala pa ngani //<small>soon</small></div>';
 ghos.classList.toggle("none",!HL.length);
 let owner=null;
 async function getOwner(){if(owner)return owner;try{const r=await(await fetch("https://api.lanyard.rest/v1/users/"+CFG.owner)).json(),d=r.data.discord_user;owner={name:d.global_name||d.username,img:d.avatar?`https://cdn.discordapp.com/avatars/${CFG.owner}/${d.avatar}.png?size=64`:AV}}catch(e){owner={name:"OWNER",img:AV}}return owner}
