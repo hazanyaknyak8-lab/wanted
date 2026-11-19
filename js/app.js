@@ -39,7 +39,6 @@ const parseB=s=>+String(s||"").replace(/\D/g,"")||0,TOTAL=people.reduce((a,u)=>a
 const peso=s=>{const n=parseB(s);return n?"₱"+n.toLocaleString("en-US"):""};
 $("#npt").textContent=CFG.musicTitle;
 
-/* ---------- views ---------- */
 const VIEWS=["home","mw","w","hos","srv"];
 const TN={mw:"Most wanted",w:"Wanted"};
 const CROSS='<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6z"/></svg>';
@@ -69,17 +68,15 @@ document.addEventListener("keydown",e=>{
   if(lr){modalOn()?nav(lr):step(lr)}
   else if(e.key==="/"&&!modalOn()){const q=$(".view.on .q");if(q){e.preventDefault();q.focus()}}
 });
-/* swipe (phone): kaliwa/kanan para lumipat ng tab o ng target sa popup */
+
 function swipe(el,fn){let sx=0,sy=0;
   el.addEventListener("touchstart",e=>{const t=e.touches[0];sx=t.clientX;sy=t.clientY},{passive:true});
   el.addEventListener("touchend",e=>{const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*2)fn(dx<0?1:-1)},{passive:true})}
 swipe($("main"),d=>{if(!modalOn())step(d)});
 swipe($("#modal"),d=>nav(d));
 
-/* popups: i-lock ang likod habang bukas */
 const lockBg=on=>{$("main").inert=on;$("#top").inert=on};
 
-/* ---------- log ---------- */
 function log(msg,cls){
   const el=$("#log"),d=document.createElement("div");
   d.innerHTML=`<span>${new Date().toTimeString().slice(0,8)}</span>`;d.append(msg);if(cls)d.className=cls;
@@ -87,14 +84,13 @@ function log(msg,cls){
 }
 setInterval(()=>{$("#clk").textContent=new Date().toTimeString().slice(0,8)},1000);
 
-/* ---------- cards ---------- */
 const cn=u=>{const n=(u.name||"").trim();return /[\p{L}\p{N}]{2}/u.test(n)?n:(u.un||"").replace("@","")||u.id};
 const IMG=`<img alt="" src="${AV}" onload="this.classList.add('ok')" onerror="this.classList.add('ok')">`;
 function card(u){
   const lead=u.kind==="mw"&&u.rank===1;
   return `<button class="card offline ${u.kind}${lead?" lead":""}" id="u${u.id}" data-id="${u.id}" aria-label="Open case file">
   <div class="ph">${IMG}<b class="rk">#${pad(u.rank)}</b><span class="stt"><i class="dot"></i><span class="stx sl">Offline</span></span></div>
-  <div class="info">${lead?`<div class="kl">basta ako si dope, most wanted</div>`:""}<div class="nm">${u.id}</div><div class="mrow"><div class="stars">${stars(u.threat)}</div><span class="bty">${peso(u.bounty)}</span></div><span class="un">loading…</span></div></button>`;
+  <div class="info">${lead?`<div class="kl">hari ng kapogian</div>`:""}<div class="nm">${u.id}</div><div class="mrow"><div class="stars">${stars(u.threat)}</div><span class="bty">${peso(u.bounty)}</span></div><span class="un">loading…</span></div></button>`;
 }
 $("#gmw").innerHTML=people.filter(u=>u.kind==="mw").map(card).join("");
 $("#gw").innerHTML=people.filter(u=>u.kind==="w").map(card).join("");
@@ -134,7 +130,6 @@ async function refresh(){
   if(openId)fillFile(byId(openId));
 }
 
-/* ---------- case file popup ---------- */
 let openId=null,lastFocus=null;
 function fillFile(u){
   const f=$(".file");f.className="file "+(u.s||"offline")+" "+u.kind+(u.kind==="mw"&&u.rank===1?" lead":"");
@@ -179,7 +174,6 @@ async function copyId(){
   b.textContent="Copied";clearTimeout(b._t);b._t=setTimeout(()=>b.textContent="Copy ID",1400);
 }
 
-/* ---------- servers ---------- */
 const srv=(s)=>`<a class="s${s.plug?" plug":""}" id="s${s.code}" href="https://discord.gg/${s.code}" target="_blank" rel="noopener">
   <img alt="" src="${AV}"><div><b>${s.label}</b><small>discord.gg/${s.code}</small></div><span class="go">${s.plug?"Join":"Join server"}</span></a>`;
 $("#gs").innerHTML=CFG.servers.filter(s=>!s.plug).map(srv).join("")+'<div class="plh">Plugs</div>'+CFG.servers.filter(s=>s.plug).map(srv).join("");
@@ -191,7 +185,7 @@ CFG.servers.forEach(async s=>{
   }catch(e){}
 });
 
-/* ---------- music: autoplay, fallback sa tap, resume ---------- */
+
 const au=new Audio();au.loop=true;au.preload="auto";au.src=CFG.music;au.volume=CFG.volume;
 const topEl=$("#top"),mute=$("#mute"),vol=$("#vol");
 let userOff=false,playing=false;vol.value=CFG.volume*100;
@@ -209,10 +203,9 @@ mute.onclick=()=>{if(au.paused){userOff=false;au.muted=false;au.play().then(ui).
 vol.oninput=()=>{au.volume=vol.value/100;if(au.volume>0){au.muted=false;userOff=false}ui()};
 ui();
 
-/* ---------- boot: hintayin ang font para walang flash ng maling letra ---------- */
 let ready=false,exited=false;
 async function boot(){
-  try{await Promise.race([document.fonts.load('400 100px "Pirata One"'),sleep(2200)])}catch(e){}
+  try{await Promise.race([document.fonts.load('800 100px "Grenze Gotisch"'),sleep(2200)])}catch(e){}
   document.documentElement.classList.add("fr");
   await sleep(rm?0:900);ready=true;$("#enter").classList.add("show");
 }
@@ -227,17 +220,16 @@ $("#gate").addEventListener("click",()=>{userOff=false;au.muted=false;au.play().
 log("Roster is live","al");stats();
 boot();
 
-/* ---------- bg.gif: ilalagay lang kapag nahanap ---------- */
+
 const bgi=new Image();bgi.onload=()=>document.documentElement.classList.add("hasbg");bgi.src="bg.gif";
 
-/* ---------- toast ---------- */
+
 function toast(msg){
   const box=$("#toasts"),el=document.createElement("div");el.className="toast";el.append(msg);box.appendChild(el);
   while(box.children.length>3)box.firstChild.remove();
   setTimeout(()=>{el.classList.add("out");setTimeout(()=>el.remove(),450)},4200);
 }
 
-/* ---------- search + online-only filter ---------- */
 const flt={q:"",on:false};
 function applyFlt(){
   const q=flt.q.trim().toLowerCase();
@@ -254,7 +246,6 @@ $$("[data-f]").forEach(b=>b.addEventListener("click",()=>{
   flt.on=!flt.on;$$("[data-f]").forEach(c=>{c.classList.toggle("on",flt.on);c.setAttribute("aria-pressed",flt.on)});applyFlt();
 }));
 
-/* ---------- count-up ---------- */
 const money=n=>{n=Math.round(n);return"₱"+(n>=1e6?(n/1e6).toFixed(2).replace(/\.?0+$/,"")+"M":n>=1e3?Math.round(n/1e3)+"K":n)};
 function countUp(el,to,fmt,ms=1400){
   if(rm){el.textContent=fmt(to);return}
@@ -262,11 +253,9 @@ function countUp(el,to,fmt,ms=1400){
   (function f(n){const k=Math.min(1,(n-t0)/ms);el.textContent=fmt(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(t0);
 }
 
-/* ---------- nav indicator ---------- */
 function moveInd(){const b=$("#nav button.on"),i=$("#nvi");if(!b||!i)return;i.style.width=b.offsetWidth+"px";i.style.transform=`translateX(${b.offsetLeft}px)`}
 addEventListener("resize",moveInd);document.fonts&&document.fonts.ready.then(moveInd);setTimeout(moveInd,300);
 
-/* ---------- HOS (hostage): ikaw lang ang nagpo-post, via js/hostages.js ---------- */
 const HL=Array.isArray(window.HOS)?window.HOS:[],esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const LOCK='<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
 const hmed=(p,full)=>p.video?`<video src="${esc(p.video)}${full?"":"#t=0.6"}" playsinline ${full?"controls autoplay loop":'muted preload="metadata"'}></video>`:p.image?`<img alt="" src="${esc(p.image)}">`:`<div class="hx">✝</div>`;
