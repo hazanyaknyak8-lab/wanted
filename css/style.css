@@ -501,8 +501,112 @@ html.fr #gate::before{opacity:1;transform:scale(1)}
 #gate::before{filter:brightness(1.9) contrast(1.15) saturate(1.1);
   background:linear-gradient(90deg,rgba(5,2,3,.5),rgba(5,2,3,0) 55%),url(../img/angel.jpg) 74% 40%/cover no-repeat}
 #gate::after{background:radial-gradient(ellipse at 60% 50%,transparent 55%,rgba(0,0,0,.6))}
-@media (min-width:900px){.gt{font-size:clamp(90px,11.5vw,170px)}.gw{margin-right:26vw}}
+
 #gate::before{filter:brightness(1.4) contrast(1.1)}
 @media (min-width:900px){.gw{margin-right:34vw}}
 #home::before,#home::after{opacity:.4}
 #enter.show{color:#fff;background:rgba(10,6,7,.6)}
+
+
+/* ================= v14 ================= */
+/* --- fonts: hacker/doxxer mono lang, lowkey --- */
+:root{
+  --mono:"JetBrains Mono","DejaVu Sans Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --disp:var(--mono);--black:var(--mono);--sans:var(--mono);
+}
+body{font:400 13.5px/1.6 var(--mono);letter-spacing:.01em}
+body,button,input{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
+.brand{font:800 17px/1 var(--mono);letter-spacing:.32em;color:var(--red2);text-transform:uppercase}
+.brand::after{content:"_";margin-left:2px;animation:cur 1.1s steps(1) infinite}
+@keyframes cur{50%{opacity:0}}
+.head h2,.nm,.mn,.s b{font-family:var(--mono);text-transform:uppercase}
+.head h2{font-weight:800;font-size:clamp(24px,3.6vw,36px);letter-spacing:.1em}
+.head h2::before{content:"> ";color:var(--red2)}
+.head em{font-size:12px;letter-spacing:.04em}
+.nm{font-weight:700;font-size:14px;letter-spacing:.06em}
+.card.lead .nm{font-size:clamp(22px,3.6vw,42px);letter-spacing:.05em}
+.mn{font-weight:800;font-size:clamp(22px,3.2vw,34px);letter-spacing:.05em}
+.s b{font-weight:700;font-size:15px;letter-spacing:.06em}
+.s:not(.plug) b{font-size:22px}
+.bty,.hud b,#mb{font-family:var(--mono);font-weight:800;letter-spacing:0}
+.bty{font-size:16px}
+.card.lead .bty{font-size:clamp(24px,3.4vw,40px)}
+.hud b{font-size:30px}#mb{font-size:28px}
+.un,.sub,.tagl,.hud span,.stat,.lh,.row>span,.why>span,.mt,.kl{font-family:var(--mono)}
+.tagl{font-size:14px;max-width:480px;letter-spacing:.01em}
+.tagl::before{content:"// ";color:var(--red2)}
+.why p{font-size:15px}
+.fq{font:700 clamp(13px,1.8vw,17px)/1.7 var(--mono);letter-spacing:.04em;text-transform:lowercase;color:var(--mut)}
+.fq .cr{font-size:15px;margin-bottom:8px}
+#enter,.btn,.chip,.nb,#nav button{font-family:var(--mono)}
+
+/* --- ASCII WANTED (logo + gate) --- */
+.asc{margin:0;white-space:pre;text-align:left;font:700 var(--fs,10px)/1.02 var(--mono);letter-spacing:0;
+  font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0;color:var(--red2);
+  text-shadow:0 0 5px rgba(240,64,79,.6),0 0 24px rgba(214,25,43,.38);user-select:none;-webkit-user-select:none}
+.asc-s{display:none;flex-direction:column;align-items:center;gap:.9em}
+.logo,.gt{font:inherit;line-height:1;white-space:normal;color:inherit;letter-spacing:0;text-shadow:none;display:flex;justify-content:center}
+.logo.mv{text-shadow:none}
+.logo .asc.w,.gt .asc.w{--fs:min(calc(88vw/51.6),19px)}
+.gt .asc.w{--fs:min(calc(46vw/51.6),15px)}
+.logo .asc-s .asc,.gt .asc-s .asc{--fs:calc(84vw/26.4)}
+.logo{will-change:transform}
+/* gate title laging lumalabas (hindi na naka-depende sa html.fr) */
+.gt{opacity:0;animation:gin 1.1s .15s var(--ease) forwards}
+.logo .asc{animation:flk 7s steps(1) infinite}
+@keyframes flk{0%,93%,96%,100%{opacity:1}94%{opacity:.78}95%{opacity:.95}}
+
+/* --- intro: anghel (naka-embed, hindi na maliligaw ang path) --- */
+#gate::before{background:linear-gradient(90deg,rgba(5,2,3,.55),rgba(5,2,3,0) 55%),var(--angel) 72% 40%/cover no-repeat;
+  opacity:0;transform:scale(1.06);transition:none;
+  animation:angin 2.2s .1s var(--ease-io) forwards,angz 16s linear forwards}
+html.fr #gate::before{opacity:0;transform:scale(1.06)}
+@keyframes angin{to{opacity:1}}
+@keyframes angz{to{transform:scale(1)}}
+@media (min-width:900px){.gw{margin-right:42vw}}
+
+/* --- kamay (naka-embed) --- */
+#home::before{background-image:var(--hand-l)}
+#home::after{background-image:var(--hand-r)}
+#home::before,#home::after{opacity:.28}
+
+/* --- mouse trail: PC lang --- */
+#wtrail{position:fixed;inset:0;width:100%;height:100%;z-index:300;pointer-events:none}
+@media (hover:none),(pointer:coarse){#wtrail{display:none!important}}
+
+/* --- tablet --- */
+@media (max-width:900px){
+  .gw{margin-right:0}
+  .gt .asc.w{--fs:min(calc(88vw/51.6),15px)}
+}
+
+/* --- phone: stacked WAN / TED na mas malaki --- */
+@media (max-width:720px){
+  .asc.w{display:none}
+  .asc-s{display:flex}
+  .logo .asc-s .asc,.gt .asc-s .asc{--fs:calc(74vw/26.4)}
+  #gate::before{background:linear-gradient(180deg,rgba(5,2,3,.2),rgba(5,2,3,0) 45%,rgba(5,2,3,.35)),var(--angel) 76% 100%/auto 74% no-repeat;filter:brightness(1.5) contrast(1.1)}
+  .gw{transform:translateY(-14vh)}
+  #gate::after{background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.2),rgba(0,0,0,.7))}
+  .hero{gap:14px}
+  .head h2{font-size:24px}
+  .nm{font-size:13px}.bty{font-size:15px}
+  .mn{font-size:26px}#mb{font-size:24px}
+  .card.lead .nm{font-size:22px}.card.lead .bty{font-size:24px}
+  .s b{font-size:14px}.s:not(.plug) b{font-size:18px}
+  .fq{font-size:13px;margin-top:16px}
+  .tagl{font-size:13px}
+  #nav button{font-size:10px;letter-spacing:.08em}
+  #home::before,#home::after{opacity:.3;top:46%;width:min(46vw,260px)}
+}
+@media (max-width:360px){#nav button{font-size:9px;letter-spacing:.04em}}
+@media (max-height:520px) and (min-width:721px){.logo .asc.w{--fs:min(calc(86vw/51.6),calc(26vh/6.5))}}
+
+/* --- touch devices: mas magaan, walang 3D tilt/blur --- */
+@media (hover:none){
+  .view{filter:none;will-change:auto}
+  .card{transform:none;transform-style:flat;will-change:auto}
+  .card:active{transform:scale(.98)}
+  .logo{transform:none;will-change:auto}
+}
+@media (prefers-reduced-motion:reduce){.brand::after,.logo .asc{animation:none}.gt{opacity:1;animation:none}#gate::before{opacity:1;animation:none;transform:none}}
