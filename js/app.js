@@ -94,7 +94,7 @@ function card(u){
   const lead=u.kind==="mw"&&u.rank===1;
   return `<button class="card offline ${u.kind}${lead?" lead":""}" id="u${u.id}" data-id="${u.id}" aria-label="Open case file">
   <div class="ph">${IMG}<b class="rk">#${pad(u.rank)}</b><span class="stt"><i class="dot"></i><span class="stx sl">Offline</span></span></div>
-  <div class="info">${lead?`<div class="kl">$basta ako si dope, most wanted</div>`:""}<div class="nm">${u.id}</div><div class="mrow"><div class="stars">${stars(u.threat)}</div><span class="bty">${peso(u.bounty)}</span></div><span class="un">loading…</span></div></button>`;
+  <div class="info">${lead?`<div class="kl">basta ako si dope, most wanted</div>`:""}<div class="nm">${u.id}</div><div class="mrow"><div class="stars">${stars(u.threat)}</div><span class="bty">${peso(u.bounty)}</span></div><span class="un">loading…</span></div></button>`;
 }
 $("#gmw").innerHTML=people.filter(u=>u.kind==="mw").map(card).join("");
 $("#gw").innerHTML=people.filter(u=>u.kind==="w").map(card).join("");
